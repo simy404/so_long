@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 21:22:35 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/14 01:54:48 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/14 06:58:31 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ int	is_valid_file_extension(char *file_path)
 		&& file_path[i - 3] == 'b' && file_path[i - 4] == '.')
 		return (1);
 	return (0);
+}
+
+int validate_map(char **map)
+{
+	return (1);
 }

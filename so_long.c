@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:58:22 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/13 23:15:11 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/14 06:55:35 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	main(int argc, char** argv)
 	if (argc != 2)
 		return (print_error("Error"));
 	map_array = load_map_array(argv[1]);
-	// if (!map_array)
-	// 	return (print_error("Error"));
+	if (!map_array || !validate_map(map_array))
+		return (print_error("Error"));
 	print_array(map_array);
-
 }
