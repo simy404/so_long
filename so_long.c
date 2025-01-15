@@ -23,15 +23,30 @@ void print_array(char **array)
 		i++;
 	}
 }
+void free_map(char** map_array)
+{
+	int	i;
 
+	i = 0;
+	while (map_array[i])
+		free(map_array[i++]);
+	free(map_array);
+	map_array = NULL;
+}
 int	main(int argc, char** argv)
 {
 	char	**map_array;
+	int		is_valid;
 
+	is_valid = 1;
 	if (argc != 2)
 		return (print_error("Error"));
 	map_array = load_map_array(argv[1]);
-	if (!map_array || !validate_map(map_array))
+	if (!map_array || !is_map_valid(map_array))
+		is_valid = 0;
+	if (is_valid)
+		print_array(map_array);
+	else
 		return (print_error("Error"));
-	print_array(map_array);
+	free_map(map_array);
 }

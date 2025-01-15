@@ -41,6 +41,7 @@ char	**load_map_array(char* file_path)
 	if (!file_content)
 		return(0);
 	map_array = ft_split(file_content, '\n');
+	free(file_content);
 	if (!map_array)
 		return(0);
 	return (map_array);

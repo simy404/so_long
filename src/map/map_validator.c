@@ -11,19 +11,70 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
+#include "../../includes/so_long.h"
+#include "stdio.h"
 
-int	is_valid_file_extension(char *file_path)
+int	is_map_valid(char **map)
+{
+	t_map_dims	map_dims;
+
+	map_dims = get_map_dimensions(map);
+	if (!is_map_rectangle(map, map_dims) || !is_map_large_enough(map_dims) ||
+	!contains_only_valid_chars(map, map_dims) || !is_map_surrounded_by_walls(map, map_dims))
+		return (0);
+	return (1);
+}
+
+int	is_map_rectangle(char **map, t_map_dims dims)
 {
 	int	i;
 
-	i = ft_strlen(file_path);
-	if (i > 4 && file_path[i - 1] == 'r' && file_path[i - 2] == 'e'
-		&& file_path[i - 3] == 'b' && file_path[i - 4] == '.')
-		return (1);
-	return (0);
+	i = 1;
+	while (map[i])
+		if (dims.rows != ft_strlen(map[i++]))
+			return (0);
+	return (1);
 }
 
-int validate_map(char **map)
+int	is_map_large_enough(t_map_dims dims)
 {
+	return (!(dims.cols < 3 || dims.rows < 3));
+}
+
+int	contains_only_valid_chars(char **map,  t_map_dims dims)
+{
+	int	r;
+	int	c;
+
+	c = 0;
+	while (c < dims.cols)
+	{
+		r = 0;
+		while(r < dims.rows)
+			if (!is_valid_char(map[c][r++]))
+				return (0);
+		c++;
+	}
+	return (1);
+}
+
+int	is_map_surrounded_by_walls(char **map, t_map_dims dims)
+{
+	int	i;
+
+	i = 0;
+	while (i < dims.rows)
+	{
+		if (map[0][i] != WALL || map[dims.cols -1][i] != WALL)
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < dims.rows)
+	{
+		if (map[i][0] != WALL || map[i][dims.rows - 1] != WALL)
+				return (0);
+		i++;
+	}
 	return (1);
 }

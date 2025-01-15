@@ -34,6 +34,11 @@ typedef enum e_tile
 	COLLECTIBLE = 'C'
 }	t_tile;
 
+typedef	struct {
+	int	rows;
+	int	cols;
+} t_map_dims ;
+
 int		is_valid_file_extension(char *file_path);
 
 char	**load_map_array(char* file_path);
@@ -42,5 +47,9 @@ char*	read_map_file(char* file_path);
 int		print_error(char *error);
 
 char*	read_file_from_fd(int fd);
+
+int		is_map_valid(char **map);
+
+t_map_dims	get_map_dimensions(char** map);
 
 #endif
