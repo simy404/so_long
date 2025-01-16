@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"random": "c",
+		"TEST.C": "cpp"
+	}
+}

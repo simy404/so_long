@@ -6,25 +6,39 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/15 15:48:53 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:40:48 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-
-t_map_dims	get_map_dimensions(char** map)
+#include "../../libft/libft.h"
+#include <stdlib.h>
+int	get_map_column(char** map)
 {
-	t_map_dims	map_dims;
+	int cols = 0;
 
-	map_dims.rows = ft_strlen(map[0]);
-	map_dims.cols = 0;
-
-	while(map[map_dims.cols])
-		map_dims.cols++;
-	return map_dims;
+	while(map[cols])
+		cols++;
+	return cols;
 }
 
 int is_valid_char(char c)
 {
 	return (c == EMPTY || c == WALL || c == PLAYER || c == EXIT || c == COLLECTIBLE);
+}
+
+t_context* initialize_map_context(char** map)
+{
+	t_context	*context;
+
+	context = malloc(sizeof(t_context));
+	if (!context)
+		return (NULL);
+	context->map = map;
+	context->player = 0;
+	context->exit = 0;
+	context->collectible = 0;
+	context->map_rows = ft_strlen(map[0]);
+	context->map_cols = get_map_column(map);
+	return (context);
 }

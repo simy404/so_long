@@ -15,7 +15,8 @@ SRC = so_long.c \
 src/utils/print_utils.c \
 src/map/map_loader.c \
 src/map/map_validator.c \
-src/utils/read_utils.c \
+src/utils/file_utils.c \
+src/utils/map_utils.c \
 
 CC = gcc
 CFLAGS = -g
@@ -27,9 +28,8 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MINILBX)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(MINILBX) $(MLXFLAG)
-
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 $(LIBFT):
 	make -C libft
 

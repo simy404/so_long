@@ -12,7 +12,7 @@
 
 #include "includes/so_long.h"
 #include "minilibx/mlx.h"
-
+#include <stdlib.h>
 #include <stdio.h>
 void print_array(char **array)
 {
@@ -35,18 +35,24 @@ void free_map(char** map_array)
 }
 int	main(int argc, char** argv)
 {
-	char	**map_array;
-	int		is_valid;
+	t_context	*context;
+	char 			**map_array;
+	int				is_valid;
 
 	is_valid = 1;
 	if (argc != 2)
 		return (print_error("Error"));
-	map_array = load_map_array(argv[1]);
-	if (!map_array || !is_map_valid(map_array))
+	map_array =  load_map_array(argv[1]);
+	if (!map_array)
+		return (print_error("Error"));
+	context = initialize_map_context(map_array);
+	if(!context || !process_map_if_valid(context))
 		is_valid = 0;
 	if (is_valid)
-		print_array(map_array);
+		print_array(context->map);
 	else
 		return (print_error("Error"));
-	free_map(map_array);
+	free_map(context->map);
 }
+
+

@@ -13,6 +13,7 @@
 #include "../../includes/so_long.h"
 #include "../../libft/libft.h"
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 
 char*	read_map_file(char* file_path)

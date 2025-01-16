@@ -34,22 +34,30 @@ typedef enum e_tile
 	COLLECTIBLE = 'C'
 }	t_tile;
 
-typedef	struct {
-	int	rows;
-	int	cols;
-} t_map_dims ;
+typedef struct s_context
+{
+	char**	map;
+	int		map_rows;
+	int		map_cols;
+	int		player;
+	int		exit;
+	int		collectible;
+} t_context;
 
-int		is_valid_file_extension(char *file_path);
+int			is_valid_file_extension(char *file_path);
 
-char	**load_map_array(char* file_path);
-char*	read_map_file(char* file_path);
+char		**load_map_array(char* file_path);
+char*		read_map_file(char* file_path);
 
-int		print_error(char *error);
+int			print_error(char *error);
 
-char*	read_file_from_fd(int fd);
+char*		read_file_from_fd(int fd);
 
-int		is_map_valid(char **map);
+int			is_map_valid(char **map);
 
-t_map_dims	get_map_dimensions(char** map);
+t_context	get_map_dimensions(char** map);
 
+int 		process_map_if_valid(t_context* map_context);
+t_context*	initialize_map_context(char **map_array);
+int is_valid_char(char c);
 #endif
