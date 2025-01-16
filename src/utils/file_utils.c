@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	multiple_sequency_nl(char *str)
+int	has_sequential_newline(char *str)
 {
 	int	i;
 

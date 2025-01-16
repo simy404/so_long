@@ -50,7 +50,7 @@ typedef struct s_context
 char		**load_map_array(char* file_path);
 char*		read_map_file(char* file_path);
 char*		read_file_from_fd(int fd);
-int			multiple_sequency_nl(char *str);
+int			has_sequential_newline(char *str);
 
 int			print_error(char *error);
 
@@ -63,6 +63,8 @@ t_context*	initialize_map_context(char **map_array);
 void		update_map_elements(t_context* map_context, char tile);
 void		free_context(t_context* context);
 int 		process_map_if_valid(t_context* map_context);
-int	is_map_fully_accessible(t_context* context, int c, int r);
+int			is_map_fully_accessible(t_context* context, int c, int r);
+void 		set_player_position(t_context* context, int r, int c);
+char 		**map_copy(t_context* context);
 
 #endif

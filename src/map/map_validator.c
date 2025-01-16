@@ -35,11 +35,6 @@ int	is_tile_valid(t_context* context, int r, int c)
 	return (1);
 }
 
-void set_player_position(t_context* context, int r, int c)
-{
-	context->player_col = c;
-	context->player_row = r;
-}
 int	process_map_if_valid(t_context* context)
 {
 	int	r;
@@ -74,13 +69,13 @@ void flood_fill_map(char** map, int* collectible, int* exit, int c, int r)
 		(*exit)--;
 	map[c][r]= WALL;
 	if (map[c][r + 1] != WALL)
-		explore_and_mark_tiles(map, collectible, exit, c, r + 1);
+		flood_fill_map(map, collectible, exit, c, r + 1);
 	if (map[c][r - 1] != WALL)
-		explore_and_mark_tiles(map, collectible, exit, c, r - 1);
+		flood_fill_map(map, collectible, exit, c, r - 1);
 	if (map[c + 1][r] != WALL)
-		explore_and_mark_tiles(map, collectible, exit, c + 1, r);
+		flood_fill_map(map, collectible, exit, c + 1, r);
 	if (map[c - 1][r] != WALL)
-		explore_and_mark_tiles(map, collectible, exit, c - 1, r);
+		flood_fill_map(map, collectible, exit, c - 1, r);
 }
 void free_map_copy(char **map)
 {
@@ -94,28 +89,6 @@ void free_map_copy(char **map)
 	}
 	free(map);
 }
-char **map_copy(t_context* context)
-{
-	char	**map;
-	int		i;
-
-	map = malloc((context->map_rows + 1)*  sizeof(char*));
-	if (!map)
-		return (NULL);
-	i = 0;
-	while (context->map[i])
-	{
-		map[i] = ft_strdup(context->map[i]);
-		if (!map[i])
-		{
-			free_map_copy(map);
-			return (NULL);
-		}
-		i++;
-	}
-	map[i] = NULL;
-	return (map);
-}
 int	is_map_fully_accessible(t_context* context, int c, int r)
 {
 	char	**map;
@@ -127,7 +100,6 @@ int	is_map_fully_accessible(t_context* context, int c, int r)
 	map = map_copy(context);
 	flood_fill_map(map, &collectible, &exit, c, r);
 	free_map_copy(map);
-	printf("collectible: %d, exit: %d\n", collectible, exit);
 	if (collectible != 0 || exit != 0)
 		return (0);
 	return (1);

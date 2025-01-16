@@ -23,10 +23,8 @@ char*	read_map_file(char* file_path)
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return(0);
+		return(NULL);
 	file_content = read_file_from_fd(fd);
-	if (!file_content)
-		return(0);
 	close(fd);
 	return (file_content);
 }
@@ -38,16 +36,12 @@ char	**load_map_array(char* file_path)
 
 	map_array = NULL;
 	if (!is_valid_file_extension(file_path))
-		return(0);
+		return(NULL);
 	file_content = read_map_file(file_path);
 	if (!file_content)
-		return(0);
-	if (!multiple_sequency_nl(file_content))
+		return(NULL);
+	if (!has_sequential_newline(file_content))
 		map_array = ft_split(file_content, '\n');
 	free(file_content);
-	if (!map_array)
-		return(0);
 	return (map_array);
 }
-
-
