@@ -66,7 +66,7 @@ int	process_map_if_valid(t_context* context)
 	}
 	return (validate_required_elements(context));
 }
-void explore_and_mark_tiles(char** map, int* collectible, int* exit, int c, int r)
+void flood_fill_map(char** map, int* collectible, int* exit, int c, int r)
 {
 	if (map[c][r] == COLLECTIBLE)
 		(*collectible)--;
@@ -113,6 +113,7 @@ char **map_copy(t_context* context)
 		}
 		i++;
 	}
+	map[i] = NULL;
 	return (map);
 }
 int	is_map_fully_accessible(t_context* context, int c, int r)
@@ -124,7 +125,7 @@ int	is_map_fully_accessible(t_context* context, int c, int r)
 	collectible = context->collectible;
 	exit = context->exit;
 	map = map_copy(context);
-	explore_and_mark_tiles(map, &collectible, &exit, c, r);
+	flood_fill_map(map, &collectible, &exit, c, r);
 	free_map_copy(map);
 	printf("collectible: %d, exit: %d\n", collectible, exit);
 	if (collectible != 0 || exit != 0)
