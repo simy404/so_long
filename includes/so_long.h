@@ -40,24 +40,29 @@ typedef struct s_context
 	int		map_rows;
 	int		map_cols;
 	int		player;
+	int 	player_row;
+	int 	player_col;
 	int		exit;
 	int		collectible;
 } t_context;
 
-int			is_valid_file_extension(char *file_path);
 
 char		**load_map_array(char* file_path);
 char*		read_map_file(char* file_path);
+char*		read_file_from_fd(int fd);
+int			multiple_sequency_nl(char *str);
 
 int			print_error(char *error);
 
-char*		read_file_from_fd(int fd);
+int			is_valid_file_extension(char *file_path);
+int			is_map_large_enough(t_context* context);
+int			is_valid_tile(char c);
+int			is_border_tile(int r, int c, t_context* context);
 
-int			is_map_valid(char **map);
-
-t_context	get_map_dimensions(char** map);
-
-int 		process_map_if_valid(t_context* map_context);
 t_context*	initialize_map_context(char **map_array);
-int is_valid_char(char c);
+void		update_map_elements(t_context* map_context, char tile);
+void		free_context(t_context* context);
+int 		process_map_if_valid(t_context* map_context);
+int	is_map_fully_accessible(t_context* context, int c, int r);
+
 #endif

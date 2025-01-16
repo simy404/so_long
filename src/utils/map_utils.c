@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/16 16:49:36 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/16 19:30:46 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ int	get_map_column(char** map)
 	return cols;
 }
 
-int	is_valid_char(char c)
-{
-	return (c == EMPTY || c == WALL || c == PLAYER || c == EXIT || c == COLLECTIBLE);
-}
-
 t_context*	initialize_map_context(char** map)
 {
 	t_context	*context;
@@ -41,5 +36,31 @@ t_context*	initialize_map_context(char** map)
 	context->collectible = 0;
 	context->map_rows = ft_strlen(map[0]);
 	context->map_cols = get_map_column(map);
+	context->player_col = -1;
+	context->player_row = -1;
 	return (context);
+}
+
+void	update_map_elements(t_context* map_context, char tile)
+{
+	if (tile == PLAYER)
+		map_context->player++;
+	if (tile == EXIT)
+		map_context->exit++;
+	if (tile == COLLECTIBLE)
+		map_context->collectible++;
+}
+
+void free_context(t_context* context)
+{
+	int i;
+
+	i = 0;
+	while (context->map[i])
+	{
+		free(context->map[i]);
+		i++;
+	}
+	free(context->map);
+	free(context);
 }

@@ -13,6 +13,7 @@
 #include "includes/so_long.h"
 #include "minilibx/mlx.h"
 #include <stdlib.h>
+
 #include <stdio.h>
 void print_array(char **array)
 {
@@ -23,16 +24,7 @@ void print_array(char **array)
 		i++;
 	}
 }
-void free_map(char** map_array)
-{
-	int	i;
 
-	i = 0;
-	while (map_array[i])
-		free(map_array[i++]);
-	free(map_array);
-	map_array = NULL;
-}
 int	main(int argc, char** argv)
 {
 	t_context	*context;
@@ -45,14 +37,19 @@ int	main(int argc, char** argv)
 	map_array =  load_map_array(argv[1]);
 	if (!map_array)
 		return (print_error("Error\nInvalid map"));
+	if (!map_array[0])
+	{
+		free(map_array);
+		return (print_error("Error\nEmpty map"));
+	}
 	context = initialize_map_context(map_array);
 	if(!context || !process_map_if_valid(context))
 		is_valid = 0;
+	if (is_valid && !is_map_fully_accessible(context, context->player_col, context->player_row))
+		is_valid = 0;
 	if (is_valid)
 		print_array(context->map);
-	else
-		return (print_error("Error"));
-	free_map(context->map);
+	free_context(context);
 }
 
 

@@ -36,12 +36,14 @@ char	**load_map_array(char* file_path)
 	char	*file_content;
 	char	**map_array;
 
+	map_array = NULL;
 	if (!is_valid_file_extension(file_path))
 		return(0);
 	file_content = read_map_file(file_path);
 	if (!file_content)
 		return(0);
-	map_array = ft_split(file_content, '\n');
+	if (!multiple_sequency_nl(file_content))
+		map_array = ft_split(file_content, '\n');
 	free(file_content);
 	if (!map_array)
 		return(0);

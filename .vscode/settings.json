@@ -2,6 +2,7 @@
 	"files.associations": {
 		"libft.h": "c",
 		"random": "c",
-		"TEST.C": "cpp"
+		"TEST.C": "cpp",
+		"so_long.h": "c"
 	}
 }

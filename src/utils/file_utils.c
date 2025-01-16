@@ -15,6 +15,19 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+int	multiple_sequency_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '\n' && str[i + 1] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 char	*str_append(char const *s1, char const *s2)
 {
 	size_t	s1_len;

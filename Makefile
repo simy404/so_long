@@ -15,6 +15,7 @@ SRC = so_long.c \
 src/utils/print_utils.c \
 src/map/map_loader.c \
 src/map/map_validator.c \
+src/map/map_rules.c \
 src/utils/file_utils.c \
 src/utils/map_utils.c \
 

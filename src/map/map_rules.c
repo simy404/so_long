@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:43:31 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/16 16:49:09 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/16 17:15:09 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ int	is_border_tile(int r, int c, t_context* context)
 int	is_map_large_enough(t_context* context)
 {
 	return (!(context->map_cols < 3 || context->map_rows < 3));
+}
+
+int	is_valid_tile(char c)
+{
+	return (c == EMPTY || c == WALL || c == PLAYER || c == EXIT || c == COLLECTIBLE);
 }
