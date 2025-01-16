@@ -13,15 +13,6 @@
 #include "../../libft/libft.h"
 #include "../../includes/so_long.h"
 
-int	is_map_large_enough(t_context* context)
-{
-	return (!(context->map_cols < 3 || context->map_rows < 3));
-}
-
-int	is_border_tile(int r, int c, t_context* context)
-{
-    return (r == 0 || r == context->map_rows - 1 || c == 0 || c == context->map_cols - 1);
-}
 void	update_map_context(t_context* map_context, char tile)
 {
 	if (tile == PLAYER)
@@ -30,6 +21,16 @@ void	update_map_context(t_context* map_context, char tile)
 		map_context->exit++;
 	if (tile == COLLECTIBLE)
 		map_context->collectible++;
+}
+int	validate_map_requirements(t_context* context)
+{
+	if (context->player != 1)
+		return (print_error("Error\nMap must have one player"));
+	if (context->exit != 1)
+		return (print_error("Error\nMap must have one exit"));
+	if (context->collectible < 1)
+		return (print_error("Error\nMap must have at least one collectible"));
+	return (1);
 }
 
 int	process_map_if_valid(t_context* context)
@@ -56,6 +57,6 @@ int	process_map_if_valid(t_context* context)
 			return (print_error("Error\nMap is not rectangular"));
 		c++;
 	}
-	return (context->player == 1 && context->exit == 1 && context->collectible > 0);
+	return (validate_map_requirements(context));
 }
 
