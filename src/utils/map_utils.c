@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/16 23:12:22 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/17 00:19:59 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ void set_player_position(t_context* context, int r, int c)
 {
 	context->player_col = c;
 	context->player_row = r;
+}
+void free_map_copy(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
 
 char **map_copy(t_context* context)

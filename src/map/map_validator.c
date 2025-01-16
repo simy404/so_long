@@ -77,18 +77,7 @@ void flood_fill_map(char** map, int* collectible, int* exit, int c, int r)
 	if (map[c - 1][r] != WALL)
 		flood_fill_map(map, collectible, exit, c - 1, r);
 }
-void free_map_copy(char **map)
-{
-	int	i;
 
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
 int	is_map_fully_accessible(t_context* context, int c, int r)
 {
 	char	**map;

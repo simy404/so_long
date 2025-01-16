@@ -66,5 +66,6 @@ int 		process_map_if_valid(t_context* map_context);
 int			is_map_fully_accessible(t_context* context, int c, int r);
 void 		set_player_position(t_context* context, int r, int c);
 char 		**map_copy(t_context* context);
+void		free_map_copy(char **map);
 
 #endif
