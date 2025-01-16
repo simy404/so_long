@@ -53,7 +53,7 @@ int	process_map_if_valid(t_context* context)
 			r++;
 		}
 		if (context->map_rows != r)
-			return (0);
+			return (print_error("Error\nMap is not rectangular"));
 		c++;
 	}
 	return (context->player == 1 && context->exit == 1 && context->collectible > 0);

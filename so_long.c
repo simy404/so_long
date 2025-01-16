@@ -41,10 +41,10 @@ int	main(int argc, char** argv)
 
 	is_valid = 1;
 	if (argc != 2)
-		return (print_error("Error"));
+		return (print_error("Error\nInvalid number of arguments"));
 	map_array =  load_map_array(argv[1]);
 	if (!map_array)
-		return (print_error("Error"));
+		return (print_error("Error\nInvalid map"));
 	context = initialize_map_context(map_array);
 	if(!context || !process_map_if_valid(context))
 		is_valid = 0;
