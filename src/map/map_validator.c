@@ -63,19 +63,15 @@ int	process_map_if_valid(t_context* context)
 }
 void flood_fill_map(char** map, int* collectible, int* exit, int c, int r)
 {
-	if (map[c][r] == COLLECTIBLE)
-		(*collectible)--;
-	else if (map[c][r] == EXIT)
-		(*exit)--;
+	if (map[c][r] == WALL)
+		return ;
+	*collectible -=  map[c][r] == COLLECTIBLE;
+	*exit -= map[c][r] == EXIT;
 	map[c][r]= WALL;
-	if (map[c][r + 1] != WALL)
-		flood_fill_map(map, collectible, exit, c, r + 1);
-	if (map[c][r - 1] != WALL)
-		flood_fill_map(map, collectible, exit, c, r - 1);
-	if (map[c + 1][r] != WALL)
-		flood_fill_map(map, collectible, exit, c + 1, r);
-	if (map[c - 1][r] != WALL)
-		flood_fill_map(map, collectible, exit, c - 1, r);
+	flood_fill_map(map, collectible, exit, c, r + 1);
+	flood_fill_map(map, collectible, exit, c, r - 1);
+	flood_fill_map(map, collectible, exit, c + 1, r);
+	flood_fill_map(map, collectible, exit, c - 1, r);
 }
 
 int	is_map_fully_accessible(t_context* context, int c, int r)
@@ -89,7 +85,5 @@ int	is_map_fully_accessible(t_context* context, int c, int r)
 	map = map_copy(context);
 	flood_fill_map(map, &collectible, &exit, c, r);
 	free_map_copy(map);
-	if (collectible != 0 || exit != 0)
-		return (0);
-	return (1);
+	return (collectible == 0 && exit == 0);
 }
