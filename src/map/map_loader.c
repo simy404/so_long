@@ -43,7 +43,7 @@ char	**load_map_array(char *file_path)
 	if (file_content[0] != '\n' && !has_sequential_newline(file_content))
 		map_array = ft_split(file_content, '\n');
 	else
-		return (print_error_null("Error\nMap has extra newlines"));
+		print_error_null("Error\nMap has extra newlines");
 	free(file_content);
 	return (map_array);
 }

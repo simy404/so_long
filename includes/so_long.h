@@ -37,11 +37,11 @@ typedef enum e_tile
 typedef struct s_context
 {
 	char**	map;
-	int		map_rows;
-	int		map_cols;
-	int		player;
+	int		map_row_count;
+	int		map_col_count;
 	int 	player_row;
 	int 	player_col;
+	int		player;
 	int		exit;
 	int		collectible;
 } t_context;
@@ -57,16 +57,18 @@ void*		print_error_null(char *error);
 
 int			is_valid_file_extension(char *file_path);
 int			is_map_large_enough(t_context* context);
-int			is_valid_tile(char c);
+int			is_tile_type_valid(char c);
 int			is_border_tile(int r, int c, t_context* context);
+int			validate_required_elements(t_context* context);
+int			validate_tile(t_context* context, int r, int c);
 
-t_context*	initialize_map_context(char **map_array);
+t_context*	init_map_context(char **map_array);
 void		update_map_elements(t_context* map_context, char tile);
-void		free_context(t_context* context);
+int			free_context(t_context *context);
 int 		process_map_if_valid(t_context* map_context);
-int			is_map_fully_accessible(t_context* context, int c, int r);
+int			is_map_elements_reachable(t_context* context);
 void 		set_player_position(t_context* context, int r, int c);
-char 		**map_copy(t_context* context);
-void		free_map_copy(char **map);
+char		**duplicate_map(t_context *context);
+void		free_map(char **map);
 
 #endif

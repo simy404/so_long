@@ -35,22 +35,20 @@ int	main(int argc, char **argv)
 	char **map_array;
 	int is_valid;
 
-	is_valid = 1;
 	if (argc != 2)
 		return (print_error("Error\nInvalid number of arguments"));
+	is_valid = 1;
 	map_array = load_map_array(argv[1]);
 	if (!map_array)
 		return (0);
-	context = initialize_map_context(map_array);
-	if (!context || !process_map_if_valid(context))
+	context = init_map_context(map_array);
+	if (!context)
+		return (print_error("Error\nFailed to initialize map context"));
+	if (!process_map_if_valid(context) || !is_map_elements_reachable(context))
 		is_valid = 0;
-	if (is_valid && !is_map_fully_accessible(context, context->player_col,
-			context->player_row))
+	if (is_valid)
 	{
-		print_error("Error\nMap is not fully accessible");
-		is_valid = 0;
+		print_array(map_array);
 	}
-	// if (is_valid)
-	// 	print_array(context->map);
 	free_context(context);
 }
