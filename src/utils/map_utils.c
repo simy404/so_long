@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/17 00:19:59 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/17 18:07:05 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 #include "../../libft/libft.h"
 #include <stdlib.h>
 
-int	get_map_column(char** map)
+int	get_map_column(char **map)
 {
-	int cols = 0;
+	int	cols;
 
-	while(map[cols])
+	cols = 0;
+	while (map[cols])
 		cols++;
-	return cols;
+	return (cols);
 }
 
-t_context*	initialize_map_context(char** map)
+t_context	*initialize_map_context(char **map)
 {
 	t_context	*context;
 
@@ -41,7 +42,7 @@ t_context*	initialize_map_context(char** map)
 	return (context);
 }
 
-void	update_map_elements(t_context* map_context, char tile)
+void	update_map_elements(t_context *map_context, char tile)
 {
 	if (tile == PLAYER)
 		map_context->player++;
@@ -51,9 +52,9 @@ void	update_map_elements(t_context* map_context, char tile)
 		map_context->collectible++;
 }
 
-void free_context(t_context* context)
+void	free_context(t_context *context)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (context->map[i])
@@ -65,12 +66,12 @@ void free_context(t_context* context)
 	free(context);
 }
 
-void set_player_position(t_context* context, int r, int c)
+void	set_player_position(t_context *context, int r, int c)
 {
 	context->player_col = c;
 	context->player_row = r;
 }
-void free_map_copy(char **map)
+void	free_map_copy(char **map)
 {
 	int	i;
 
@@ -83,12 +84,12 @@ void free_map_copy(char **map)
 	free(map);
 }
 
-char **map_copy(t_context* context)
+char	**map_copy(t_context *context)
 {
 	char	**map;
 	int		i;
 
-	map = malloc((context->map_rows + 1)*  sizeof(char*));
+	map = malloc((context->map_cols + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	i = 0;

@@ -53,8 +53,7 @@ char*		read_file_from_fd(int fd);
 int			has_sequential_newline(char *str);
 
 int			print_error(char *error);
-char* 		print_error_null(char *error);
-char**		print_error_null_array(char *error);
+void*		print_error_null(char *error);
 
 int			is_valid_file_extension(char *file_path);
 int			is_map_large_enough(t_context* context);

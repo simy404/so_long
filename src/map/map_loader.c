@@ -16,33 +16,34 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-char*	read_map_file(char* file_path)
+char	*read_map_file(char *file_path)
 {
 	int		fd;
 	char	*file_content;
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return(NULL);
+		return (NULL);
 	file_content = read_file_from_fd(fd);
 	close(fd);
 	return (file_content);
 }
 
-char	**load_map_array(char* file_path)
+char	**load_map_array(char *file_path)
 {
 	char	*file_content;
 	char	**map_array;
 
+	map_array = NULL;
 	if (!is_valid_file_extension(file_path))
-		return (print_error_null_array("Error\nInvalid file extension"));
+		return (print_error_null("Error\nInvalid file extension"));
 	file_content = read_map_file(file_path);
 	if (!file_content)
-		return (print_error_null_array("Error\nInvalid file"));
+		return (print_error_null("Error\nInvalid file"));
 	if (file_content[0] != '\n' && !has_sequential_newline(file_content))
 		map_array = ft_split(file_content, '\n');
 	else
-		print_error("Error\nContains sequential or just newline");
+		return (print_error_null("Error\nMap has extra newlines"));
 	free(file_content);
 	return (map_array);
 }

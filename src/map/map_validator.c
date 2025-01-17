@@ -62,7 +62,7 @@ int	process_map_if_valid(t_context* context)
 }
 void flood_fill_map(char** map, int* collectible, int* exit, int c, int r)
 {
-	if (map[c][r] == WALL)
+	if (map[c][r] == WALL || (*collectible == 0 && *exit == 0))
 		return ;
 	*collectible -=  map[c][r] == COLLECTIBLE;
 	*exit -= map[c][r] == EXIT;
