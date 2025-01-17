@@ -3,6 +3,8 @@
 		"libft.h": "c",
 		"random": "c",
 		"TEST.C": "cpp",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"fcntl.h": "c",
+		"unistd.h": "c"
 	}
 }

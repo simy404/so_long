@@ -12,7 +12,6 @@
 
 #include "../../libft/libft.h"
 #include "../../includes/so_long.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 int	validate_required_elements(t_context* context)

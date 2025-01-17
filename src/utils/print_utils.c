@@ -17,3 +17,14 @@ int	print_error(char *error)
 	ft_putendl_fd(error, 2);
 	return (0);
 }
+
+char*	print_error_null(char *error)
+{
+	ft_putendl_fd(error, 2);
+	return (NULL);
+}
+char**	print_error_null_array(char *error)
+{
+	ft_putendl_fd(error, 2);
+	return (NULL);
+}

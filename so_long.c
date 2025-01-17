@@ -28,20 +28,15 @@ void print_array(char **array)
 int	main(int argc, char** argv)
 {
 	t_context	*context;
-	char 			**map_array;
-	int				is_valid;
+	char 		**map_array;
+	int			is_valid;
 
 	is_valid = 1;
 	if (argc != 2)
 		return (print_error("Error\nInvalid number of arguments"));
 	map_array =  load_map_array(argv[1]);
 	if (!map_array)
-		return (print_error("Error\nInvalid map"));
-	if (!map_array[0])
-	{
-		free(map_array);
-		return (print_error("Error\nEmpty map"));
-	}
+		return (0);
 	context = initialize_map_context(map_array);
 	if(!context || !process_map_if_valid(context))
 		is_valid = 0;
@@ -51,5 +46,3 @@ int	main(int argc, char** argv)
 		print_array(context->map);
 	free_context(context);
 }
-
-
