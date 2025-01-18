@@ -17,6 +17,7 @@
 #include "minilibx/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <X11/X.h>
 
 
 void	print_array(char **array)
@@ -28,7 +29,38 @@ void	print_array(char **array)
 		i++;
 	}
 }
+// typedef struct s_mlx_struct
+// {
+// 	void* mlx;
+// 	void* mlx_win;
+// } t_mlx_struct;
 
+// void key_press_handler(int keycode)
+// {
+// 	printf("%d\n", keycode);
+// 	if (keycode == 65307)
+// 		exit(1);
+// }
+void draw_image(t_context *content, void *mlx, void *mlx_win)
+{
+	int x = 0;
+	int y = 0;
+	int w = -1;
+	void* image = mlx_xpm_file_to_image(mlx, "assets/Wood.xpm", &w, &w);
+			mlx_put_image_to_window(mlx, mlx_win, image, x*TILE_SIZE, y*TILE_SIZE);
+
+	while(content->map[y])
+	{
+		x = 0;
+		while (content->map[x])
+		{
+			x++;
+		}
+		mlx_put_image_to_window(mlx, mlx_win, image, (x + 1)*TILE_SIZE, y*TILE_SIZE);
+
+		y++;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_context	*context;
@@ -50,7 +82,8 @@ int	main(int argc, char **argv)
 		is_valid = 0;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, TILE_SIZE * context->map_row_count, TILE_SIZE * context->map_row_count, "so_long");
+	mlx_win = mlx_new_window(mlx, TILE_SIZE * (context->map_row_count), TILE_SIZE * (context->map_row_count), "so_long");
+	draw_image(context, mlx, mlx_win);
 	mlx_loop(mlx);
 	free_context(context);
 }
