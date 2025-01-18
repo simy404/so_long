@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/17 22:58:04 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/18 10:29:07 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,6 @@ void	update_map_elements(t_context *map_context, char tile)
 		map_context->exit++;
 	else if (tile == COLLECTIBLE)
 		map_context->collectible++;
-}
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-int	free_context(t_context *context)
-{
-	free_map(context->map);
-	free(context);
-	return (0);
 }
 
 void	set_player_position(t_context *context, int r, int c)

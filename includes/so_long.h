@@ -14,8 +14,9 @@
 # define SO_LONG_H
 
 #define BUFFER_SIZE 42
-#define TILE_SIZE 32
+#define TILE_SIZE 1000
 #define ESC 65307
+
 
 typedef enum e_direction
 {

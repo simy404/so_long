@@ -18,6 +18,7 @@ src/map/map_validator.c \
 src/map/map_rules.c \
 src/utils/file_utils.c \
 src/utils/map_utils.c \
+src/utils/free_utils.c \
 
 CC = gcc
 CFLAGS = -g
@@ -29,8 +30,8 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(MINILBX)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(MINILBX) $(MLXFLAG)
 $(LIBFT):
 	make -C libft
 

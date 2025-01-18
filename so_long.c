@@ -31,9 +31,11 @@ void	print_array(char **array)
 
 int	main(int argc, char **argv)
 {
-	t_context *context;
-	char **map_array;
-	int is_valid;
+	t_context	*context;
+	char 		**map_array;
+	void		*mlx;
+	void		*mlx_win;
+	int			is_valid;
 
 	if (argc != 2)
 		return (print_error("Error\nInvalid number of arguments"));
@@ -46,9 +48,9 @@ int	main(int argc, char **argv)
 		return (print_error("Error\nFailed to initialize map context"));
 	if (!process_map_if_valid(context) || !is_map_elements_reachable(context))
 		is_valid = 0;
-	if (is_valid)
-	{
-		print_array(map_array);
-	}
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, TILE_SIZE * context->map_row_count, TILE_SIZE * context->map_row_count, "so_long");
+	mlx_loop(mlx);
 	free_context(context);
 }

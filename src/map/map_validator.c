@@ -40,7 +40,8 @@ int	process_map_if_valid(t_context* context)
 	}
 	return (validate_required_elements(context));
 }
-void  dfs_map_search(char** map, int* elements, int c, int r)
+
+void	dfs_map_search(char** map, int* elements, int c, int r)
 {
 	if (map[c][r] == WALL || *elements == 0)
 		return ;
