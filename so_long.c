@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 		safe_exit_with_error(game, NULL, NULL);
 	if (!initialize_graphics(game))
 		safe_exit_with_error(game, NULL, NULL);
-	mlx_key_hook(game->graphics->mlx_win, movement, game);
+	mlx_key_hook(game->graphics->mlx_win, key_input_handler, game);
 	mlx_loop(game->graphics->mlx);
 }

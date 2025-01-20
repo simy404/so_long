@@ -13,9 +13,10 @@
 #include "../../includes/so_long.h"
 #include "../../minilibx/mlx.h"
 #include <stdio.h>
-int movement(int keycode, t_game *game)
+int mov_player(t_game *game, t_tile tile);
+
+int	key_input_handler(int keycode, t_game *game)
 {
-	printf("Keycode: %d\n", keycode);
 	if (keycode == ESC)
 		safe_exit_with_error(game, NULL, NULL);
 	if (keycode == UP)

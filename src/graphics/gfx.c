@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 14:48:52 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/20 10:19:23 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/20 17:45:01 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	create_images(t_graphics* graphics)
 	graphics->wall_img = load_image(graphics, "./assets/hcoskun.xpm");
 	if (!graphics->wall_img)
 		return (print_error("Error\nFailed to load wall image"));
-	graphics->player_img = load_image(graphics, "./assets/ngungor.xpm");
+	graphics->player_img = load_image(graphics, "./assets/player.xpm");
 	if (!graphics->player_img)
 		return (print_error("Error\nFailed to load player image"));
 	graphics->collectible_img = load_image(graphics, "./assets/hsamir.xpm");

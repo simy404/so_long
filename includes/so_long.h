@@ -94,6 +94,6 @@ int			initialize_graphics(t_game* game);
 void		*load_image(t_graphics *graphics, char *path);
 int 		safe_exit_with_error(t_game* game, char** map, char *error);
 int			get_map_col_count(char **map);
-int			movement(int keycode, t_game *game);
+int			key_input_handler(int keycode, t_game *game);
 
 #endif
