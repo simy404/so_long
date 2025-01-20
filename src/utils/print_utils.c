@@ -18,7 +18,7 @@ int	print_error(char *error)
 	return (0);
 }
 
-void*	print_error_null(char *error)
+void	*print_error_null(char *error)
 {
 	ft_putendl_fd(error, 2);
 	return (NULL);

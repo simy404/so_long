@@ -5,6 +5,8 @@
 		"TEST.C": "cpp",
 		"so_long.h": "c",
 		"fcntl.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"mlx.h": "c",
+		"stdlib.h": "c"
 	}
 }

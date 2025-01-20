@@ -19,9 +19,13 @@ src/map/map_rules.c \
 src/utils/file_utils.c \
 src/utils/map_utils.c \
 src/utils/free_utils.c \
+src/utils/init_utils.c \
+src/graphics/gfx.c \
+src/utils/graphics_utils.c \
+src/movement/mov_player.c
 
-CC = gcc
-CFLAGS = -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = libft/libft.a
 
 MINILBX = minilibx/libmlx.a

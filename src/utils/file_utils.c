@@ -20,7 +20,7 @@ int	has_sequential_newline(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\n' && str[i + 1] == '\n')
 			return (1);
@@ -28,6 +28,7 @@ int	has_sequential_newline(char *str)
 	}
 	return (0);
 }
+
 char	*str_append(char const *s1, char const *s2)
 {
 	size_t	s1_len;
@@ -90,4 +91,3 @@ int	is_valid_file_extension(char *file_path)
 		return (1);
 	return (0);
 }
-

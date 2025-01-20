@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/18 10:29:07 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/20 10:17:13 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,59 +24,41 @@ int	get_map_col_count(char **map)
 	return (cols);
 }
 
-t_context	*init_map_context(char **map)
-{
-	t_context	*context;
-
-	context = malloc(sizeof(t_context));
-	if (!context)
-		return (NULL);
-	context->map = map;
-	context->player = 0;
-	context->exit = 0;
-	context->collectible = 0;
-	context->map_row_count = ft_strlen(map[0]);
-	context->map_col_count = get_map_col_count(map);
-	context->player_col = -1;
-	context->player_row = -1;
-	return (context);
-}
-
-void	update_map_elements(t_context *map_context, char tile)
+void	update_map_elements(t_map *map, char tile)
 {
 	if (tile == PLAYER)
-		map_context->player++;
+		map->player++;
 	else if (tile == EXIT)
-		map_context->exit++;
+		map->exit++;
 	else if (tile == COLLECTIBLE)
-		map_context->collectible++;
+		map->collectible++;
 }
 
-void	set_player_position(t_context *context, int r, int c)
+void	set_player_position(t_map *map, int r, int c)
 {
-	context->player_col = c;
-	context->player_row = r;
+	map->player_col = c;
+	map->player_row = r;
 }
 
-char	**duplicate_map(t_context *context)
+char	**duplicate_map(t_map *map)
 {
-	char	**map;
+	char	**map_arr;
 	int		i;
 
-	map = malloc((context->map_col_count + 1) * sizeof(char *));
+	map_arr = malloc((map->map_col_count + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	i = 0;
-	while (context->map[i])
+	while (map->map[i])
 	{
-		map[i] = ft_strdup(context->map[i]);
-		if (!map[i])
+		map_arr[i] = ft_strdup(map->map[i]);
+		if (!map_arr[i])
 		{
-			free_map(map);
+			free_map_arr(map_arr);
 			return (NULL);
 		}
 		i++;
 	}
-	map[i] = NULL;
-	return (map);
+	map_arr[i] = NULL;
+	return (map_arr);
 }
