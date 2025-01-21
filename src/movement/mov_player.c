@@ -14,8 +14,8 @@
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
+#include "../../libft/libft.h"
 #include "../../minilibx/mlx.h"
-#include <stdio.h>
 
 int	mov_player_if_valid(t_game *game, int new_col, int new_row)
 {
@@ -58,7 +58,9 @@ int	key_input_handler(int keycode, t_game *game)
 		game->map->map[game->map->player_col][game->map->player_row] = EMPTY;
 		game->map->collectible--;
 	}
-	printf("Move:%d\n", game->move_count++);
+	ft_putstr_fd("Move: ", 1);
+	ft_putnbr_fd(game->move_count++, 1);
+	ft_putchar_fd('\n', 1);
 	if (game->map->map[game->map->player_col][game->map->player_row] == EXIT
 		&& game->map->collectible == 0)
 		safe_exit_with_error(game, NULL, "You won!");

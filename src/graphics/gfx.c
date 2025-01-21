@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 14:48:52 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/21 20:14:18 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 00:44:34 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	render_map(t_game *game)
 
 int	create_images(t_graphics *graphics)
 {
-	graphics->wall_img = load_image(graphics, "./assets/Wall2.xpm");
+	graphics->wall_img = load_image(graphics, "./assets/Wall.xpm");
 	if (!graphics->wall_img)
 		return (print_error("Error\nFailed to load wall image"));
-	graphics->player_img = load_image(graphics, "./assets/Player2.xpm");
+	graphics->player_img = load_image(graphics, "./assets/Player.xpm");
 	if (!graphics->player_img)
 		return (print_error("Error\nFailed to load player image"));
 	graphics->collectible_img = load_image(graphics,
