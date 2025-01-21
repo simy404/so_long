@@ -5,18 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 21:22:35 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/14 06:58:31 by hsamir           ###   ########.fr       */
+/*   Created: 2025/01/21 14:56:38 by hsamir            #+#    #+#             */
+/*   Updated: 2025/01/21 14:56:38 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../includes/so_long.h"
+#include "../../libft/libft.h"
 
 int	process_map_if_valid(t_map *map)
 {
 	int	r;
 	int	c;
+
 	if (!is_map_large_enough(map))
 		return (print_error("Error\nMap width or height is too small"));
 	c = 0;
@@ -43,7 +44,7 @@ void	dfs_map_search(char **map, int *elements, int c, int r)
 {
 	if (map[c][r] == WALL || *elements == 0)
 		return ;
-	*elements -= map[c][r] == COLLECTIBLE || map[c][r] == EXIT;
+	*(elements) -= ((map[c][r] == COLLECTIBLE) || (map[c][r] == EXIT));
 	map[c][r] = WALL;
 	dfs_map_search(map, elements, c, r + 1);
 	dfs_map_search(map, elements, c, r - 1);
@@ -60,7 +61,8 @@ int	is_map_elements_reachable(t_game *game)
 	map_arr = duplicate_map(game->map);
 	if (!map_arr)
 		safe_exit_with_error(game, NULL, "Error\nMemory allocation failed");
-	dfs_map_search(map_arr, &elements, game->map->player_col, game->map->player_row);
+	dfs_map_search(map_arr, &elements, game->map->player_col,
+		game->map->player_row);
 	free_map_arr(map_arr);
 	if (elements != 0)
 		return (print_error("Error\nMap elements are not reachable"));

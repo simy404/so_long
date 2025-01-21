@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 10:28:53 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/20 10:09:28 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:55:55 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	free_map_arr(char **map)
 	free(map);
 }
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
 	if (map->map)
 		free_map_arr(map->map);
 	free(map);
 }
+
 int	free_graphics(t_graphics *graphics)
 {
 	if (graphics->wall_img)
@@ -45,6 +46,8 @@ int	free_graphics(t_graphics *graphics)
 		mlx_destroy_image(graphics->mlx, graphics->collectible_img);
 	if (graphics->exit_img)
 		mlx_destroy_image(graphics->mlx, graphics->exit_img);
+	if (graphics->empty_img)
+		mlx_destroy_image(graphics->mlx, graphics->empty_img);
 	if (graphics->mlx_win)
 		mlx_destroy_window(graphics->mlx, graphics->mlx_win);
 	if (graphics->mlx)
@@ -56,7 +59,7 @@ int	free_graphics(t_graphics *graphics)
 	return (0);
 }
 
-int safe_exit_with_error(t_game* game, char** map, char *error)
+int	safe_exit_with_error(t_game *game, char **map, char *error)
 {
 	if (map)
 		free_map_arr(map);

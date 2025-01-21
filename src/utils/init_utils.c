@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 22:02:56 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/20 01:33:14 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/21 17:38:31 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_graphics	*init_graphics(void)
 	graphics->wall_img = NULL;
 	graphics->player_img = NULL;
 	graphics->collectible_img = NULL;
+	graphics->empty_img = NULL;
 	graphics->exit_img = NULL;
 	return (graphics);
 }
@@ -57,9 +58,10 @@ t_game	*init_game(char **map)
 		safe_exit_with_error(NULL, map, "Error\nFailed to allocate memory for game");
 	game->map = init_map(map);
 	if (!game->map)
-		safe_exit_with_error(game, map, "Error\nFailed to initialize game");
+		safe_exit_with_error(game, map, "Error\nFailed to allocate memory for map");
 	game->graphics = init_graphics();
 	if (!game->graphics)
-		safe_exit_with_error(game, NULL, "Error\nFailed to initialize game");
+		safe_exit_with_error(game, NULL, "Error\nFailed to allocate memory for graphics");
+	game->map->player = 0;
 	return (game);
 }

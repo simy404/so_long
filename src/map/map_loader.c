@@ -34,16 +34,17 @@ char	**load_map_array(char *file_path)
 	char	*file_content;
 	char	**map_array;
 
-	map_array = NULL;
 	if (!is_valid_file_extension(file_path))
 		return (print_error_null("Error\nInvalid file extension"));
 	file_content = read_map_file(file_path);
 	if (!file_content)
 		return (print_error_null("Error\nInvalid file"));
-	if (file_content[0] != '\n' && !has_sequential_newline(file_content))
-		map_array = ft_split(file_content, '\n');
-	else
-		print_error_null("Error\nMap has extra newlines");
+	if (file_content[0] != '\n' && has_sequential_newline(file_content))
+		return (free_with_error_null("Error\nMap has extra newlines",
+				file_content));
+	map_array = ft_split(file_content, '\n');
 	free(file_content);
+	if (!map_array)
+		return (print_error_null("Error\nMemory allocation failed"));
 	return (map_array);
 }

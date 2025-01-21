@@ -25,7 +25,7 @@ src/utils/graphics_utils.c \
 src/movement/mov_player.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/libft.a
 
 MINILBX = minilibx/libmlx.a
