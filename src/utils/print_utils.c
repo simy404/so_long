@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-#include "stdlib.h"
+#include <stdlib.h>
 
 int	print_error(char *error)
 {

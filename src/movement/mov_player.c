@@ -58,7 +58,7 @@ int	key_input_handler(int keycode, t_game *game)
 		game->map->map[game->map->player_col][game->map->player_row] = EMPTY;
 		game->map->collectible--;
 	}
-	// printf("Move:%d\n", game->move_count++);
+	printf("Move:%d\n", game->move_count++);
 	if (game->map->map[game->map->player_col][game->map->player_row] == EXIT
 		&& game->map->collectible == 0)
 		safe_exit_with_error(game, NULL, "You won!");

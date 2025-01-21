@@ -27,7 +27,6 @@ src/movement/mov_player.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/libft.a
-
 MINILBX = minilibx/libmlx.a
 MLXFLAG = -lXext -lX11 -lm
 OBJ = $(SRC:.c=.o)
@@ -36,6 +35,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MINILBX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(MINILBX) $(MLXFLAG)
+
 $(LIBFT):
 	make -C libft
 
