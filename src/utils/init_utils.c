@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 22:02:56 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/22 00:15:49 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 08:30:47 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ t_game	*init_game(char **map)
 
 	game = malloc(sizeof(t_game));
 	if (!game)
-		safe_exit_with_error(NULL, map, "Error\nFailed to allocate memory for game");
+		safe_exit_with_error(NULL, map,
+			"Error\nFailed to allocate memory for game");
 	game->map = init_map(map);
 	if (!game->map)
-		safe_exit_with_error(game, map, "Error\nFailed to allocate memory for map");
+		safe_exit_with_error(game, map,
+			"Error\nFailed to allocate memory for map");
 	game->graphics = init_graphics();
 	if (!game->graphics)
-		safe_exit_with_error(game, NULL, "Error\nFailed to allocate memory for graphics");
+		safe_exit_with_error(game, NULL,
+			"Error\nFailed to allocate memory for graphics");
 	game->move_count = 0;
 	return (game);
 }

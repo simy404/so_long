@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 10:28:53 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/22 06:37:47 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 08:26:54 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	free_graphics(t_graphics *graphics)
 	free(graphics);
 	return (0);
 }
+
 void	safe_exit_with_message(t_game *game, char **map, char *message)
 {
 	if (map)

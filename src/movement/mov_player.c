@@ -32,7 +32,6 @@ int	process_key(int keycode, t_game *game)
 
 	new_row = game->map->player_row;
 	new_col = game->map->player_col;
-
 	if (keycode == UP)
 		new_col--;
 	else if (keycode == DOWN)

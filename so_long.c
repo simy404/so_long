@@ -15,13 +15,6 @@
 #include <X11/X.h>
 #include <stdlib.h>
 
-
-int	close_window(t_game *game)
-{
-	safe_exit_with_error(game, NULL, NULL);
-	return 1;
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	*game;

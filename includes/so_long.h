@@ -95,11 +95,12 @@ void		free_map_arr(char **map);
 void		*get_image_by_tile(t_graphics *graphics, char tile);
 int			initialize_graphics(t_game *game);
 void		*load_image(t_graphics *graphics, char *path);
-int 		safe_exit_with_error(t_game *game, char **map, char *error);
+int			safe_exit_with_error(t_game *game, char **map, char *error);
 void		safe_exit_with_message(t_game *game, char **map, char *message);
+int			close_window(t_game *game);
 int			get_map_col_count(char **map);
 int			key_input_handler(int keycode, t_game *game);
-void 		render_map(t_game* game);
+void		render_map(t_game *game);
 void		render_player(t_game *game);
 int			is_collectible(t_game *game);
 

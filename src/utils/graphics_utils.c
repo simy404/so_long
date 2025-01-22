@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:18:22 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/22 06:21:10 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 08:30:03 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ void	*load_image(t_graphics *graphics, char *path)
 	if (!img)
 		return (NULL);
 	return (img);
+}
+
+int	close_window(t_game *game)
+{
+	safe_exit_with_error(game, NULL, NULL);
+	return (1);
 }

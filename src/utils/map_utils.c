@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:06:15 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/22 06:23:13 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 08:32:05 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	update_map_elements(t_map *map, char tile)
 	else if (tile == COLLECTIBLE)
 		map->collectible++;
 }
+
 int	is_collectible(t_game *game)
 {
-	return (game->map->map[game->map->player_col][game->map->player_row] == COLLECTIBLE);
+	return (game->map->map[game->map->player_col][game->map->player_row]
+		== COLLECTIBLE);
 }
 
 void	set_player_position(t_map *map, int r, int c)
