@@ -20,6 +20,8 @@ int	has_extra_newline(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '\n')
+		return (1);
 	while (str[i])
 	{
 		if (str[i] == '\n' && str[i + 1] == '\n')
