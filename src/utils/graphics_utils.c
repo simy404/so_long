@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:18:22 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/21 14:53:15 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 06:21:10 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	*get_image_by_tile(t_graphics *graphics, char tile)
 
 void	render_player(t_game *game)
 {
+	if (game->map->map[game->map->player_col][game->map->player_row] == EXIT)
+		return ;
 	mlx_put_image_to_window(game->graphics->mlx, game->graphics->mlx_win,
 		game->graphics->player_img, game->map->player_row * TILE_SIZE,
 		game->map->player_col * TILE_SIZE);

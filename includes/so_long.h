@@ -74,7 +74,8 @@ int			has_sequential_newline(char *str);
 int			print_error(char *error);
 void		*print_error_null(char *error);
 void		*free_with_error_null(char *error, void *ptr);
-
+void		print_move_count(int count);
+void		print_message(char *message);
 int			is_valid_file_extension(char *file_path);
 int			is_map_large_enough(t_map *map);
 int			is_tile_type_valid(char c);
@@ -95,9 +96,11 @@ void		*get_image_by_tile(t_graphics *graphics, char tile);
 int			initialize_graphics(t_game *game);
 void		*load_image(t_graphics *graphics, char *path);
 int 		safe_exit_with_error(t_game *game, char **map, char *error);
+void		safe_exit_with_message(t_game *game, char **map, char *message);
 int			get_map_col_count(char **map);
 int			key_input_handler(int keycode, t_game *game);
 void 		render_map(t_game* game);
 void		render_player(t_game *game);
+int			is_collectible(t_game *game);
 
 #endif

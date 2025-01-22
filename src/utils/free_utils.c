@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 10:28:53 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/21 14:55:55 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 06:37:47 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ int	free_graphics(t_graphics *graphics)
 	}
 	free(graphics);
 	return (0);
+}
+void	safe_exit_with_message(t_game *game, char **map, char *message)
+{
+	if (map)
+		free_map_arr(map);
+	if (game)
+	{
+		if (game->graphics)
+			free_graphics(game->graphics);
+		if (game->map)
+			free_map(game->map);
+		free(game);
+	}
+	if (message)
+		print_message(message);
+	exit(0);
 }
 
 int	safe_exit_with_error(t_game *game, char **map, char *error)

@@ -24,46 +24,43 @@ int	mov_player_if_valid(t_game *game, int new_col, int new_row)
 	set_player_position(game->map, new_row, new_col);
 	return (1);
 }
+
+int	process_key(int keycode, t_game *game)
+{
+	int	new_row;
+	int	new_col;
+
+	new_row = game->map->player_row;
+	new_col = game->map->player_col;
+
+	if (keycode == UP)
+		new_col--;
+	else if (keycode == DOWN)
+		new_col++;
+	else if (keycode == LEFT)
+		new_row--;
+	else if (keycode == RIGHT)
+		new_row++;
+	else
+		return (0);
+	return (mov_player_if_valid(game, new_col, new_row));
+}
+
 int	key_input_handler(int keycode, t_game *game)
 {
-	int is_mov;
-
-	is_mov = 0;
 	if (keycode == ESC)
-		safe_exit_with_error(game, NULL, NULL);
-	if (!(keycode == UP || keycode == DOWN || keycode == LEFT
-			|| keycode == RIGHT))
+		safe_exit_with_message(game, NULL, "You exited the game!");
+	if (!process_key(keycode, game))
 		return (0);
-	if (keycode == UP)
-		is_mov = mov_player_if_valid(game, game->map->player_col - 1,
-				game->map->player_row);
-	else if (keycode == DOWN && game->map->map[game->map->player_col
-		+ 1][game->map->player_row] != WALL)
-		is_mov = mov_player_if_valid(game, game->map->player_col + 1,
-				game->map->player_row);
-	else if (keycode == LEFT
-		&& game->map->map[game->map->player_col][game->map->player_row
-		- 1] != WALL)
-		is_mov = mov_player_if_valid(game, game->map->player_col,
-				game->map->player_row - 1);
-	else if (keycode == RIGHT
-		&& game->map->map[game->map->player_col][game->map->player_row
-		+ 1] != WALL)
-		is_mov = mov_player_if_valid(game, game->map->player_col,
-				game->map->player_row + 1);
-	if (!is_mov)
-		return (0);
-	if (game->map->map[game->map->player_col][game->map->player_row] == COLLECTIBLE)
+	if (is_collectible(game))
 	{
 		game->map->map[game->map->player_col][game->map->player_row] = EMPTY;
 		game->map->collectible--;
 	}
-	ft_putstr_fd("Move: ", 1);
-	ft_putnbr_fd(game->move_count++, 1);
-	ft_putchar_fd('\n', 1);
+	print_move_count(game->move_count++);
 	if (game->map->map[game->map->player_col][game->map->player_row] == EXIT
 		&& game->map->collectible == 0)
-		safe_exit_with_error(game, NULL, "You won!");
+		safe_exit_with_message(game, NULL, "You won!");
 	render_map(game);
 	render_player(game);
 	return (0);

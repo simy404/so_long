@@ -16,7 +16,7 @@
 #include <stdlib.h>
 
 
-int	exit_my(t_game *game)
+int	close_window(t_game *game)
 {
 	safe_exit_with_error(game, NULL, NULL);
 	return 1;
@@ -39,6 +39,6 @@ int	main(int argc, char **argv)
 		safe_exit_with_error(game, NULL, NULL);
 	mlx_hook(game->graphics->mlx_win, KeyPress, KeyPressMask, key_input_handler,
 		game);
-	mlx_hook(game->graphics->mlx_win, 17, 1 << 17L, exit_my, game);
+	mlx_hook(game->graphics->mlx_win, 17, 1 << 17L, close_window, game);
 	mlx_loop(game->graphics->mlx);
 }
