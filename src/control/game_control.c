@@ -14,8 +14,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-#include "../../libft/libft.h"
-#include "../../minilibx/mlx.h"
+#include <stddef.h>
 
 int	mov_player_if_valid(t_game *game, int new_col, int new_row)
 {

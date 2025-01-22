@@ -85,7 +85,6 @@ int			validate_tile(t_map *map, int r, int c);
 
 t_game		*init_game(char **map);
 void		update_map_elements(t_map *map, char tile);
-int			free_context(t_game *context);
 int			process_map_if_valid(t_map *map);
 int			is_map_elements_reachable(t_game *game);
 void		set_player_position(t_map *map, int r, int c);

@@ -6,13 +6,13 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:18:22 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/22 08:30:03 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/22 08:56:12 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 #include "../../minilibx/mlx.h"
-#include <stdlib.h>
+#include <stddef.h>
 
 void	*get_image_by_tile(t_graphics *graphics, char tile)
 {

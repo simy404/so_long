@@ -22,7 +22,7 @@ src/utils/free_utils.c \
 src/utils/init_utils.c \
 src/graphics/gfx.c \
 src/utils/graphics_utils.c \
-src/movement/mov_player.c
+src/control/game_control.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

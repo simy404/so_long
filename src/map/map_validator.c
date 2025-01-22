@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-#include "../../libft/libft.h"
+#include <stdlib.h>
 
 int	process_map_if_valid(t_map *map)
 {
