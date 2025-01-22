@@ -69,7 +69,7 @@ typedef struct s_game
 char		**load_map_array(char *file_path);
 char		*read_map_file(char *file_path);
 char		*read_file_from_fd(int fd);
-int			has_sequential_newline(char *str);
+int			has_extra_newline(char *str);
 
 int			print_error(char *error);
 void		*print_error_null(char *error);

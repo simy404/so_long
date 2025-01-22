@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	has_sequential_newline(char *str)
+int	has_extra_newline(char *str)
 {
 	int	i;
 
@@ -26,6 +26,8 @@ int	has_sequential_newline(char *str)
 			return (1);
 		i++;
 	}
+	if (str[i - 1] == '\n')
+		return (1);
 	return (0);
 }
 
