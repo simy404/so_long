@@ -13,10 +13,10 @@
 #include "../../includes/so_long.h"
 #include <stdlib.h>
 
-int	process_map_if_valid(t_map *map)
+int process_map_if_valid(t_map *map)
 {
-	int	r;
-	int	c;
+	int r;
+	int c;
 
 	if (!is_map_large_enough(map))
 		return (print_error("Error\nMap width or height is too small"));
@@ -39,11 +39,12 @@ int	process_map_if_valid(t_map *map)
 	}
 	return (validate_required_elements(map));
 }
+#pragma region dfs_map_search
 
-void	dfs_map_search(char **map, int *elements, int c, int r)
+void dfs_map_search(char **map, int *elements, int c, int r)
 {
 	if (map[c][r] == WALL || *elements == 0)
-		return ;
+		return;
 	*(elements) -= ((map[c][r] == COLLECTIBLE) || (map[c][r] == EXIT));
 	map[c][r] = WALL;
 	dfs_map_search(map, elements, c, r + 1);
@@ -51,17 +52,67 @@ void	dfs_map_search(char **map, int *elements, int c, int r)
 	dfs_map_search(map, elements, c + 1, r);
 	dfs_map_search(map, elements, c - 1, r);
 }
+#pragma endregion
 
-int	is_map_elements_reachable(t_game *game)
+#pragma region  bfs_map_search
+void	add_valid_neighbor(t_node **node, char **visited, int col, int row)
 {
-	char	**map_arr;
-	int		elements;
+	if (visited[col + 1][row] != WALL)
+	{
+		append_node(node, (t_node){col + 1, row, visited[col + 1][row], NULL});
+		visited[col + 1][row] = WALL;
+	}
+	if (visited[col - 1][row] != WALL)
+	{
+		append_node(node, (t_node){col - 1, row, visited[col - 1][row], NULL});
+		visited[col - 1][row] = WALL;
+	}
+	if (visited[col][row + 1] != WALL)
+	{
+		append_node(node, (t_node){col, row + 1, visited[col][row + 1], NULL});
+		visited[col][row + 1] = WALL;
+	}
+	if (visited[col][row - 1] != WALL)
+	{
+		append_node(node, (t_node){col, row - 1, visited[col][row - 1], NULL});
+		visited[col][row - 1] = WALL;
+	}
+}
+
+void	bfs_map_search(int *elements, char **visited, int p_col, int p_row)
+{
+	t_node	*node;
+
+	node = NULL;
+	append_node(&node, (t_node){p_col, p_row, visited[p_col][p_row], NULL});
+	visited[node->col][node->row] = WALL;
+	while (node != NULL && *elements != 0)
+	{
+		if (node->val == COLLECTIBLE || node->val == EXIT)
+			(*elements)--;
+		add_valid_neighbor(&node, visited, node->col, node->row);
+		pop_node(&node);
+	}
+	while (node != NULL)
+		pop_node(&node);
+}
+#pragma endregion
+
+int is_map_elements_reachable(t_game *game)
+{
+	char **map_arr;
+	int elements;
 
 	elements = game->map->collectible + game->map->exit;
 	map_arr = duplicate_map(game->map);
 	if (!map_arr)
 		safe_exit_with_error(game, NULL, "Error\nMemory allocation failed");
+	/* DFS search
 	dfs_map_search(map_arr, &elements, game->map->player_col,
+		game->map->player_row);
+	*/
+	/* BFS search */
+	bfs_map_search(&elements, map_arr, game->map->player_col,
 		game->map->player_row);
 	free_map_arr(map_arr);
 	if (elements != 0)

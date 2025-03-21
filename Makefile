@@ -22,10 +22,11 @@ src/utils/free_utils.c \
 src/utils/init_utils.c \
 src/graphics/gfx.c \
 src/utils/graphics_utils.c \
-src/control/game_control.c
+src/control/game_control.c \
+src/utils/node_list.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBFT = libft/libft.a
 MINILBX = minilibx/libmlx.a
 MLXFLAG = -lXext -lX11 -lm

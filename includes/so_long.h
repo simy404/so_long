@@ -66,6 +66,16 @@ typedef struct s_game
 	int			move_count;
 }	t_game;
 
+/*---------BFS---------*/
+typedef struct s_node
+{
+	int			col;
+	int			row;
+	char		val;
+	struct s_node	*next;
+}	t_node;
+
+
 char		**load_map_array(char *file_path);
 char		*read_map_file(char *file_path);
 char		*read_file_from_fd(int fd);
@@ -102,5 +112,9 @@ int			key_input_handler(int keycode, t_game *game);
 void		render_map(t_game *game);
 void		render_player(t_game *game);
 int			is_collectible(t_game *game);
+
+/*---------BFS---------*/
+void		append_node(t_node **queue, t_node new_node);
+void		pop_node(t_node **queue);
 
 #endif
