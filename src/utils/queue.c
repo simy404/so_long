@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 03:41:20 by hsamir            #+#    #+#             */
-/*   Updated: 2025/03/22 12:38:17 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/03/22 15:13:43 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	dequeue (t_queue *queue)
 	if (queue->head == NULL)
 		queue->tail = NULL;
 	free(tmp);
+}
+
+void free_queue(t_queue *queue)
+{
+	while (queue->head != NULL)
+		dequeue(queue);
 }

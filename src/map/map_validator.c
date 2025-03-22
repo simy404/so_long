@@ -77,23 +77,27 @@ int	add_valid_neighbor(t_queue *queue, char **visited, const int(*direction)[2])
 	return (1);
 }
 
-void	bfs_map_search(int *elements, char **visited, int p_col, int p_row)
+int	bfs_map_search(int *elements, char **visited, int p_col, int p_row)
 {
 	t_queue queue;
 
 	queue = (t_queue){0};
-	enqueue(&queue, (t_node){p_col, p_row, visited[p_col][p_row], NULL});
+	if (!enqueue(&queue, (t_node){p_col, p_row, visited[p_col][p_row], NULL}))
+		return (0);
 	visited[queue.head->col][queue.tail->row] = WALL;
 	while (queue.head != NULL && *elements != 0)
 	{
 		if (queue.head->val == COLLECTIBLE || queue.head->val == EXIT)
 			(*elements)--;
 		if (!add_valid_neighbor(&queue, visited, (const int [4][2]){{1, 0}, {-1, 0}, {0, 1}, {0, -1}}))
-			break ;
+		{
+			free_queue(&queue);
+			return (0);
+		}
 		dequeue(&queue);
 	}
-	while (queue.head != NULL)
-		dequeue(&queue);
+	free_queue(&queue);
+	return (1);
 }
 #pragma endregion
 
@@ -111,8 +115,9 @@ int is_map_elements_reachable(t_game *game)
 		game->map->player_row);
 	*/
 	/* BFS search */
-	bfs_map_search(&elements, map_arr, game->map->player_col,
-		game->map->player_row);
+	if (!bfs_map_search(&elements, map_arr, game->map->player_col,
+		game->map->player_row))
+		return (free_map_arr(map_arr), print_error("Error\nMemory allocation failed"));
 	free_map_arr(map_arr);
 	if (elements != 0)
 		return (print_error("Error\nMap elements are not reachable"));

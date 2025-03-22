@@ -123,5 +123,6 @@ int			is_collectible(t_game *game);
 /*---------BFS---------*/
 int			enqueue(t_queue *queue, t_node new_node);
 void		dequeue(t_queue *queue);
+void 		free_queue(t_queue *queue);
 
 #endif
