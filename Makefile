@@ -23,7 +23,7 @@ src/utils/init_utils.c \
 src/graphics/gfx.c \
 src/utils/graphics_utils.c \
 src/control/game_control.c \
-src/utils/node_list.c
+src/utils/queue.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g

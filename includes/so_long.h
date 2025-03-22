@@ -75,6 +75,13 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
+/*---------BFS---------*/
+typedef struct s_queue
+{
+	t_node	*head;
+	t_node	*tail;
+} t_queue;
+
 
 char		**load_map_array(char *file_path);
 char		*read_map_file(char *file_path);
@@ -114,7 +121,7 @@ void		render_player(t_game *game);
 int			is_collectible(t_game *game);
 
 /*---------BFS---------*/
-void		append_node(t_node **queue, t_node new_node);
-void		pop_node(t_node **queue);
+int			enqueue(t_queue *queue, t_node new_node);
+void		dequeue(t_queue *queue);
 
 #endif

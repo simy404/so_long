@@ -55,46 +55,45 @@ void dfs_map_search(char **map, int *elements, int c, int r)
 #pragma endregion
 
 #pragma region  bfs_map_search
-void	add_valid_neighbor(t_node **node, char **visited, int col, int row)
+int	add_valid_neighbor(t_queue *queue, char **visited, const int(*direction)[2])
 {
-	if (visited[col + 1][row] != WALL)
+	int i;
+	int col;
+	int row;
+
+	i = 0;
+	while (i < 4)
 	{
-		append_node(node, (t_node){col + 1, row, visited[col + 1][row], NULL});
-		visited[col + 1][row] = WALL;
+		col = queue->head->col + direction[i][0];
+		row = queue->head->row + direction[i][1];
+		if (visited[col][row] != WALL)
+		{
+			if (!enqueue(queue, (t_node){col, row, visited[col][row], NULL}))
+				return (0);
+			visited[col][row] = WALL;
+		}
+		i++;
 	}
-	if (visited[col - 1][row] != WALL)
-	{
-		append_node(node, (t_node){col - 1, row, visited[col - 1][row], NULL});
-		visited[col - 1][row] = WALL;
-	}
-	if (visited[col][row + 1] != WALL)
-	{
-		append_node(node, (t_node){col, row + 1, visited[col][row + 1], NULL});
-		visited[col][row + 1] = WALL;
-	}
-	if (visited[col][row - 1] != WALL)
-	{
-		append_node(node, (t_node){col, row - 1, visited[col][row - 1], NULL});
-		visited[col][row - 1] = WALL;
-	}
+	return (1);
 }
 
 void	bfs_map_search(int *elements, char **visited, int p_col, int p_row)
 {
-	t_node	*node;
+	t_queue queue;
 
-	node = NULL;
-	append_node(&node, (t_node){p_col, p_row, visited[p_col][p_row], NULL});
-	visited[node->col][node->row] = WALL;
-	while (node != NULL && *elements != 0)
+	queue = (t_queue){0};
+	enqueue(&queue, (t_node){p_col, p_row, visited[p_col][p_row], NULL});
+	visited[queue.head->col][queue.tail->row] = WALL;
+	while (queue.head != NULL && *elements != 0)
 	{
-		if (node->val == COLLECTIBLE || node->val == EXIT)
+		if (queue.head->val == COLLECTIBLE || queue.head->val == EXIT)
 			(*elements)--;
-		add_valid_neighbor(&node, visited, node->col, node->row);
-		pop_node(&node);
+		if (!add_valid_neighbor(&queue, visited, (const int [4][2]){{1, 0}, {-1, 0}, {0, 1}, {0, -1}}))
+			break ;
+		dequeue(&queue);
 	}
-	while (node != NULL)
-		pop_node(&node);
+	while (queue.head != NULL)
+		dequeue(&queue);
 }
 #pragma endregion
 

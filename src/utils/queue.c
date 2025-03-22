@@ -1,62 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node_list.c                                        :+:      :+:    :+:   */
+/*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 03:41:20 by hsamir            #+#    #+#             */
-/*   Updated: 2025/03/21 08:27:35 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/03/22 12:38:17 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../../includes/so_long.h"
 
-t_node	*get_last_node(t_node *node)
-{
-	t_node	*last_node;
-
-	last_node = node;
-	while (last_node->next)
-		last_node = last_node->next;
-	return (last_node);
-}
-
-
-void append_node(t_node **node, t_node new_node)
+int enqueue (t_queue *queue, t_node new_node)
 {
 	t_node *new;
 
 	new = malloc(sizeof(t_node));
 	if (!new)
-		return ;
+		return (0);
 	*new = new_node;
-	if (*node == NULL)
-		*node = new;
+	if (queue->head == NULL)
+	{
+		queue->head = new;
+		queue->tail = new;
+	}
 	else
-		get_last_node(*node)->next = new;
-
+	{
+		queue->tail->next = new;
+		queue->tail = new;
+	}
+	return (1);
 }
-void pop_node(t_node **node)
+
+void	dequeue (t_queue *queue)
 {
 	t_node	*tmp;
 
-	if (!*node)
+	if (queue->head == NULL)
 		return ;
-	tmp = *node;
-	*node = (*node)->next;
+	tmp = queue->head;
+	queue->head = queue->head->next;
+	if (queue->head == NULL)
+		queue->tail = NULL;
 	free(tmp);
-}
-
-void insert_node(t_node **node, t_node new_node)
-{
-	t_node *new;
-
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return ;
-	*new = new_node;
-	new->next = *node;
-	*node = new;
 }
